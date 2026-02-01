@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0 # Required to preserve history for trend analysis
 
-      - name: Set up your test environment
+      #- name: Set up your test environment
         # Add steps here to set up your specific environment (e.g., Node.js, Java, Python)
         # Example for Java/Maven:
         # uses: actions/setup-java@v4
