@@ -128,7 +128,7 @@ jobs:
       # Generate Allure Report
       # ----------------------------
       - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@v1.7
+        uses: simple-elf/allure-report-action@master
         with:
           allure_results: allure-results
           gh_pages: allure-report
@@ -139,7 +139,7 @@ jobs:
       # Deploy to GitHub Pages
       # ----------------------------
       - name: Deploy Allure Report
-        uses: peaceiris/actions-gh-pages@v3.9.3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
