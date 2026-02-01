@@ -89,6 +89,16 @@ jobs:
           echo "Listing allure-results:"
           ls -R allure-results || echo "No allure-results found"
 
+      
+      - name: Ensure Allure artifact is never empty
+        if: always()
+        run: |
+            mkdir -p allure-results
+            if [ -z "$(ls -A allure-results)" ]; then
+            echo "No Allure results generated" > allure-results/EMPTY_RUN.txt
+            fi
+      
+      
       # ----------------------------
       # Upload Allure Results
       # ----------------------------
@@ -98,7 +108,7 @@ jobs:
         with:
           name: allure-results
           path: allure-results
-          if-no-files-found: warn
+          #if-no-files-found: warn
 
   report:
     needs: test
@@ -106,6 +116,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
       # ----------------------------
       # Download results
       # ----------------------------
