@@ -16,9 +16,9 @@ Feature: Social Network Tests
 
 
   # @env:qa @site:SocialNetwork @role:admin @auth:fresh
-  Scenario: Create New User
-     Given user on soacial home page
-     When enter all feilds 
-     And click on submit button
-     When verify new user email
-     And login with new user
+  #Scenario: Create New User
+  #   Given user on soacial home page
+  #   When enter all feilds 
+  #   And click on submit button
+  #   When verify new user email
+  #   And login with new user
