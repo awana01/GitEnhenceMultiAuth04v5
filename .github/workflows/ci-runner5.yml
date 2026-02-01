@@ -82,8 +82,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ./bin/Debug/net9.0/allure-results
-          path: ./bin/Debug/net9.0/allure-results
+          name: .\bin\Debug\net9.0\allure-results
+          path: .\bin\Debug\net9.0\allure-results
           retention-days: 20
 
   report:
@@ -95,8 +95,8 @@ jobs:
       - name: Download Allure Results
         uses: actions/download-artifact@v4
         with:
-          name: ./bin/Debug/net9.0/allure-results
-          path: ./bin/Debug/net9.0/allure-results
+          name: .\bin\Debug\net9.0\allure-results
+          path: .\bin\Debug\net9.0\allure-results
 
       - name: Checkout gh-pages
         uses: actions/checkout@v4
@@ -108,7 +108,7 @@ jobs:
         uses: simple-elf/allure-report-action@master
         with:
           allure_results: ./bin/Debug/net9.0/allure-results
-          gh_pages: ./bin/Debug/net9.0/allure-report
+          gh_pages: .\bin\Debug\net9.0\allure-report
           allure_history: allure-history
           keep_reports: 20
 
@@ -117,4 +117,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./bin/Debug/net9.0/allure-report
+          publish_dir: .\bin\Debug\net9.0\allure-report
