@@ -23,7 +23,7 @@ jobs:
         run: dotnet restore
 
       - name: Install Playwright browsers
-        run: pwsh bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+        run: pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
 
       - name: Run SpecFlow NUnit Playwright tests
         run: dotnet test 
@@ -32,7 +32,7 @@ jobs:
       - name: Download Allure CLI
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
       - name: Install Allure
         run: |
           curl -o allure.zip -L https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.zip
@@ -48,3 +48,14 @@ jobs:
         with:
           name: allure-report
           path: allure-report
+          
+          # ===============================
+          # Deploy to GitHub Pages
+         # ===============================
+      - name: Deploy Allure Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-report
