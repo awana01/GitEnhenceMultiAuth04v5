@@ -72,7 +72,11 @@ jobs:
         shell: pwsh
         run: |
           pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
-
+       
+      - name: Prepare Allure results directory
+        run: mkdir allure-results
+        
+        
       - name: Run tests
         shell: pwsh
         run: dotnet test --no-build --no-restore
