@@ -21,9 +21,9 @@
     #~ runs-on: windows-latest
     
     #~ steps:
-      - name: Run Playwright Tests (Windows)
-        runs-on: windows-latest
-        timeout-minutes: 90
+      #~ - name: Run Playwright Tests (Windows)
+        #~ runs-on: windows-latest
+        #~ timeout-minutes: 90
         
       #~ - name: Checkout code
         #~ uses: actions/checkout@v4
