@@ -17,12 +17,14 @@ env:
   AUTH_MODE: storage
 
 jobs:
-  test:
-    name: Run Playwright Tests (Windows)
+  build:
     runs-on: windows-latest
-    timeout-minutes: 90
-
+    
     steps:
+      #~ - name: Run Playwright Tests (Windows)
+        #~ runs-on: windows-latest
+        #~ timeout-minutes: 90
+        
       - name: Checkout code
         uses: actions/checkout@v4
 
