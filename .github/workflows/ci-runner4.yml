@@ -77,7 +77,7 @@ jobs:
       # Run Tests (pipeline continues on failure)
       # ----------------------------
       - name: Run Playwright tests
-        run: dotnet test --no-build --no-restore
+        run: dotnet test --settings allure.runsettings --no-build --no-restore
         continue-on-error: true
 
       # ----------------------------

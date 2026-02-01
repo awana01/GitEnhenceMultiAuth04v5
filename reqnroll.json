@@ -1,0 +1,10 @@
+{
+  "bindingCulture": {
+    "name": "en-US"
+  },
+  "plugins": [
+    {
+      "name": "Allure.Reqnroll"
+    }
+  ]
+}
