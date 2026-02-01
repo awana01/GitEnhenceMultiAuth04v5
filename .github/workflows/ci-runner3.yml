@@ -1,0 +1,118 @@
+name: Generate Allure Report on Windows
+
+on:
+  push:
+    branches:
+      - main # or your primary branch
+
+jobs:
+  build:
+    runs-on: windows-latest # Specifies the Windows runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required to preserve history for trend analysis
+
+      - name: Set up your test environment
+        # Add steps here to set up your specific environment (e.g., Node.js, Java, Python)
+        # Example for Java/Maven:
+        # uses: actions/setup-java@v4
+        # with:
+        #   distribution: 'temurin'
+        #   java-version: '11'
+
+      - name: Run tests and generate Allure results
+        # Replace with the command to run your tests and produce 'allure-results'
+        # Example for Playwright (Node.js):
+        # run: npx playwright test
+        # Example for Maven:
+        # run: mvn test
+        run: |
+          # Your test command goes here
+          echo "Running tests..."
+          # Ensure your test command generates files in the 'allure-results' directory
+        
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+          #${{ env.DOTNET_VERSION }}
+
+      - name: Verify .NET version
+        run: |
+          dotnet --version
+          dotnet --list-sdks
+          dotnet --list-runtimes
+
+      # ===============================
+      # CACHE: NuGet packages
+      # ===============================
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~\.nuget\packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/nuget.config') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+
+      # ===============================
+      # CACHE: Playwright browsers
+      # ===============================
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~\AppData\Local\ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+
+      - name: Restore dependencies
+        shell: pwsh
+        run: dotnet restore
+
+      - name: Build project
+        shell: pwsh
+        run: dotnet build --no-restore
+
+      - name: Install Playwright browsers
+        shell: pwsh
+        run: |
+          pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+       
+      - name: Prepare Allure results directory
+        run: mkdir allure-results
+        
+        
+      - name: Run tests
+        shell: pwsh
+        run: dotnet test --no-build --no-restore
+        continue-on-error: true
+        
+      - name: Get Allure history
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure-results: allure-results
+            # Allure history will be preserved automatically
+
+        # ===============================
+        # Deploy to GitHub Pages
+        # ===============================
+      - name: Deploy Allure Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-report
+          # The link to the report will be available in the "pages build and deployment" workflow

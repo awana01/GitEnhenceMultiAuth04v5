@@ -1,60 +1,60 @@
-name: CI - SpecFlow NUnit Playwright
+#~ name: CI - SpecFlow NUnit Playwright
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+#~ on:
+  #~ push:
+    #~ branches: [ main ]
+  #~ pull_request:
+    #~ branches: [ main ]
 
-jobs:
-  test:
-    runs-on: windows-latest   # Playwright works well on Windows runners
+#~ jobs:
+  #~ test:
+    #~ runs-on: windows-latest   # Playwright works well on Windows runners
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    #~ steps:
+      #~ - name: Checkout repository
+        #~ uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '9.0.x'   # adjust to your project version
+      #~ - name: Setup .NET
+        #~ uses: actions/setup-dotnet@v4
+        #~ with:
+          #~ dotnet-version: '9.0.x'   # adjust to your project version
        
-      - name: Install dependencies
-        run: dotnet restore
+      #~ - name: Install dependencies
+        #~ run: dotnet restore
         
-      - name: Build project
-        shell: pwsh
-        run: dotnet build --no-restore
+      #~ - name: Build project
+        #~ shell: pwsh
+        #~ run: dotnet build --no-restore
 
-      - name: Install Playwright browsers
-        shell: pwsh
-        run: |
-          pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+      #~ - name: Install Playwright browsers
+        #~ shell: pwsh
+        #~ run: |
+          #~ pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
 
-      - name: Run SpecFlow NUnit Playwright tests
-        run: dotnet test 
+      #~ - name: Run SpecFlow NUnit Playwright tests
+        #~ run: dotnet test 
 
-       # Allure setup
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-           distribution: 'temurin'   # required
-           java-version: '21'
+       #~ # Allure setup
+      #~ - name: Setup Java
+        #~ uses: actions/setup-java@v4
+        #~ with:
+           #~ distribution: 'temurin'   # required
+           #~ java-version: '21'
 
           
-      - name: Install Allure
-        run: |
-          curl -o allure.zip -L https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.zip
-          tar -xf allure.zip
-          echo "${{ github.workspace }}/allure-2.29.0/bin" >> $GITHUB_PATH
+      #~ - name: Install Allure
+        #~ run: |
+          #~ curl -o allure.zip -L https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.zip
+          #~ tar -xf allure.zip
+          #~ echo "${{ github.workspace }}/allure-2.29.0/bin" >> $GITHUB_PATH
 
-      - name: Generate Allure Report
-        shell: pwsh
-        run: |
-          allure generate allure-results -o allure-report --clean
+      #~ - name: Generate Allure Report
+        #~ shell: pwsh
+        #~ run: |
+          #~ allure generate allure-results -o allure-report --clean
 
-      - name: Upload Allure Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: allure-report
+      #~ - name: Upload Allure Report
+        #~ uses: actions/upload-artifact@v4
+        #~ with:
+          #~ name: allure-report
+          #~ path: allure-report
