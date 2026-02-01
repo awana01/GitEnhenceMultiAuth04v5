@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest # Specifies the Windows runner
+    runs-on: ubuntu-latest # Specifies the Windows runner
 
     steps:
       - name: Checkout code
