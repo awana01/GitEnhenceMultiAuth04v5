@@ -99,7 +99,7 @@ jobs:
           path: gh-pages
 
       - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@v1.7
+        uses: simple-elf/allure-report-action@master
         with:
           allure_results: allure-results
           gh_pages: allure-report
