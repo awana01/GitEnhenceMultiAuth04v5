@@ -35,10 +35,13 @@ jobs:
         run: dotnet test 
 
        # Allure setup
-      - name: Download Allure CLI
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
+           distribution: 'temurin'   # required
+           java-version: '21'
+
+          
       - name: Install Allure
         run: |
           curl -o allure.zip -L https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.zip
