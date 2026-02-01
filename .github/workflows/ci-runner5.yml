@@ -8,7 +8,7 @@ on:
      - main
  
 jobs:
-   test:
+  test:
       runs-on: windows-latest
       steps:
       - name: Checkout code
@@ -69,7 +69,7 @@ jobs:
           git checkout -f gh-pages
           git rm -rf .
  
-   report:
+  report:
      needs: test
      runs-on: ubuntu-latest
      steps:
