@@ -1,0 +1,151 @@
+name: Playwright Tests
+ 
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select environment to run tests'
+        required: true
+        default: 'SIT'
+        type: choice
+        options:
+          - SIT
+          - UAT
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+ 
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - uses: actions/checkout@v4
+ 
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+ 
+    - name: Build & Install
+      run: dotnet build
+ 
+    - name: Ensure browsers are installed
+      run: pwsh bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+ 
+    # Clean up previous test and allure results before starting the tests
+    - name: Clean Allure and Test Results
+      run: |
+        rm -rf allure-results
+        rm -rf allure-report
+        rm -rf test-results
+    # Run the tests and generate Allure results directly
+    - name: Run tests # name: Playwright Tests
+ 
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select environment to run tests'
+        required: true
+        default: 'SIT'
+        type: choice
+        options:
+          - SIT
+          - UAT
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+ 
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - uses: actions/checkout@v4
+ 
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 6.0
+ 
+    - name: Build & Install
+      run: dotnet build
+ 
+    - name: Ensure browsers are installed
+      run: pwsh bin/Debug/net6.0/playwright.ps1 install --with-deps
+ 
+    # Clean up previous test and allure results before starting the tests
+    - name: Clean Allure and Test Results
+      run: |
+        rm -rf allure-results
+        rm -rf allure-report
+        rm -rf test-results
+    # Run the tests and generate Allure results directly
+    - name: Run tests                #for ${{ github.event.inputs.environment }} environment
+      env:
+        TEST_ENV: ${{ github.event.inputs.environment }}
+        TEST_URL: ${{ github.event.inputs.environment == 'SIT' && 'https://demoqa.com' || 'https://UAT-demoqa.com' }}  # Set the URL based on the environment
+      run: |
+        dotnet test
+      continue-on-error: true
+ 
+    - name: Install Allure CLI
+      run: |
+        npm install -g allure-commandline --save-dev
+          
+# Remove both old allure-results and allure-report to ensure we're generating fresh results
+    - name: Clean Allure results and report
+      run: |
+        rm -rf allure-results
+        rm -rf allure-report
+          
+    - name: Generate Allure report
+      run: |
+        allure generate test-results --single-file --clean -o allure-report
+  
+    - name: Upload Allure report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: allure-report
+      env:
+        TEST_ENV: ${{ github.event.inputs.environment }}
+        TEST_URL: ${{ github.event.inputs.environment == 'SIT' && 'https://demoqa.com' || 'https://UAT-demoqa.com' }}  # Set the URL based on the environment
+      run: |
+        dotnet test 
+      continue-on-error: true
+ 
+    - name: Install Allure CLI
+      run: |
+        npm install -g allure-commandline --save-dev
+          
+# Remove both old allure-results and allure-report to ensure we're generating fresh results
+    - name: Clean Allure results and report
+      run: |
+        rm -rf allure-results
+        rm -rf allure-report
+          
+    - name: Generate Allure report
+      run: |
+        allure generate allure-results --single-file --clean -o allure-report
+  
+    - name: Upload Allure report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: allure-report
