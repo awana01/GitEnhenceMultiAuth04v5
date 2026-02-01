@@ -36,14 +36,14 @@ jobs:
       # ===============================
       # CACHE: NuGet packages
       # ===============================
-      #- name: Cache NuGet packages
-      #  uses: actions/cache@v4
-      #  with:
-      #    path: |
-      #      ~\.nuget\packages
-      #    key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/nuget.config') }}
-      #    restore-keys: |
-      #      nuget-${{ runner.os }}-
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~\.nuget\packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/nuget.config') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
 
       # ===============================
       # CACHE: Playwright browsers
