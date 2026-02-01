@@ -66,25 +66,7 @@ jobs:
 
       - name: Prepare Allure results directory
         run: mkdir allure-results
-       
-      - name: Ensure Allure results are not empty
-         if: always()
-         shell: pwsh
-         run: |
-              if (!(Test-Path "allure-results")) {
-                 New-Item -ItemType Directory -Path "allure-results" | Out-Null
-              }
-
-              $files = Get-ChildItem "allure-results" -Recurse -ErrorAction SilentlyContinue
-              if (-not $files) {
-                  "No Allure results generated" | Out-File "allure-results\EMPTY_RUN.txt"
-              }
-
-       
-       
-       
-       
-       
+      
       - name: Run Tests
         run: dotnet test -s allure.runsettings --no-build --no-restore
         continue-on-error: true
