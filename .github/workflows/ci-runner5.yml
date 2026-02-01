@@ -67,7 +67,7 @@ jobs:
       - name: Prepare Allure results directory
         run: mkdir allure-results
        
-       - name: Ensure Allure results are not empty
+      - name: Ensure Allure results are not empty
          if: always()
          shell: pwsh
          run: |
