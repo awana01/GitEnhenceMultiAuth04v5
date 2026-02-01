@@ -1,0 +1,46 @@
+[2026-02-01 19:14:14 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 19:14:15 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:14:19 WRN] [qa] Detected login page. Storage state invalid.
+[2026-02-01 19:14:19 INF] [qa] Performing fresh login for Site=SiteA, Role=admin
+[2026-02-01 19:14:26 INF] [qa] New auth storage created: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:14:44 INF] [qa] New User Email: Raegan1294@yopmail.com
+[2026-02-01 19:14:58 INF] [qa] Hello World!!!
+[2026-02-01 19:14:58 INF] [qa] === Test Run Finished ===
+[2026-02-01 19:14:58 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 19:14:59 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:15:04 INF] [qa] Storage state valid. Continuing.
+[2026-02-01 19:15:09 INF] [qa] === Test Run Finished ===
+[2026-02-01 19:15:09 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 19:15:10 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:15:14 INF] [qa] Storage state valid. Continuing.
+[2026-02-01 19:15:20 INF] [qa] === Test Run Finished ===
+[2026-02-01 19:15:20 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 19:15:21 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:15:25 INF] [qa] Storage state valid. Continuing.
+[2026-02-01 19:15:31 INF] [qa] === Test Run Finished ===
+[2026-02-01 19:15:31 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 19:15:32 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:15:37 INF] [qa] Storage state valid. Continuing.
+[2026-02-01 19:15:42 INF] [qa] === Test Run Finished ===
+[2026-02-01 19:16:00 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 19:16:01 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:16:08 INF] [qa] Storage state valid. Continuing.
+[2026-02-01 19:16:13 INF] [qa] === Test Run Finished ===
+[2026-02-01 19:16:13 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 19:16:14 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:16:18 INF] [qa] Storage state valid. Continuing.
+[2026-02-01 19:16:24 INF] [qa] === Test Run Finished ===
+[2026-02-01 19:16:24 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 19:16:25 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:16:29 INF] [qa] Storage state valid. Continuing.
+[2026-02-01 19:16:35 INF] [qa] === Test Run Finished ===
+[2026-02-01 19:16:48 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 19:16:49 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:16:54 INF] [qa] Storage state valid. Continuing.
+[2026-02-01 19:17:06 INF] [qa] New User Email: Alexzander1513@yopmail.com
+[2026-02-01 19:17:19 INF] [qa] Hello World!!!
+[2026-02-01 19:17:19 INF] [qa] === Test Run Finished ===
+[2026-02-01 19:17:20 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 19:17:20 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 19:17:26 INF] [qa] Storage state valid. Continuing.
+[2026-02-01 19:17:31 INF] [qa] === Test Run Finished ===

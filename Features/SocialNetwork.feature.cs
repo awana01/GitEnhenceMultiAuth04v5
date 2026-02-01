@@ -105,7 +105,7 @@ namespace GitEnhenceMultiAuth04V5.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/SocialNetwork.feature.ndjson", 4);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/SocialNetwork.feature.ndjson", 3);
         }
         
         [global::NUnit.Framework.TestAttribute()]
@@ -130,45 +130,6 @@ namespace GitEnhenceMultiAuth04V5.Features
                 await this.ScenarioStartAsync();
 #line 10
      await testRunner.GivenAsync("user on demo page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-            }
-            await this.ScenarioCleanupAsync();
-        }
-        
-        [global::NUnit.Framework.TestAttribute()]
-        [global::NUnit.Framework.DescriptionAttribute("Create New User")]
-        public async global::System.Threading.Tasks.Task CreateNewUser()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
-            string pickleIndex = "1";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Create New User", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
-            string[] tagsOfRule = ((string[])(null));
-            global::Reqnroll.RuleInfo ruleInfo = null;
-#line 19
-  this.ScenarioInitialize(scenarioInfo, ruleInfo);
-#line hidden
-            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
-            {
-                await testRunner.SkipScenarioAsync();
-            }
-            else
-            {
-                await this.ScenarioStartAsync();
-#line 20
-     await testRunner.GivenAsync("user on soacial home page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-#line 21
-     await testRunner.WhenAsync("enter all feilds", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 22
-     await testRunner.AndAsync("click on submit button", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 23
-     await testRunner.WhenAsync("verify new user email", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 24
-     await testRunner.AndAsync("login with new user", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
