@@ -51,18 +51,18 @@ jobs:
           key: playwright-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
             playwright-${{ runner.os }}-
-       
-      - name: Install Playwright browsers
-        shell: pwsh
-        run: |
-            pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
-       
-       
+                  
       - name: Restore dependencies
         run: dotnet restore
 
       - name: Build project
         run: dotnet build --no-restore
+        
+      - name: Install Playwright browsers
+        shell: pwsh
+        run: |
+             pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+       
 
       - name: Prepare Allure results directory
         run: mkdir allure-results
