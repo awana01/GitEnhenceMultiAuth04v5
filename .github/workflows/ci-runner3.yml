@@ -103,9 +103,9 @@ jobs:
         if: always()
         id: allure-report
         with:
-          allure_results: allure-results
+          allure_results: ../../../allure-results
           gh_pages: gh-pages
-          allure_report: allure-report
+          allure_report: ../../../allure-report
           allure_history: allure-history
           keep_reports: 20
             # Allure history will be preserved automatically
@@ -119,5 +119,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-report
+          publish_dir: ../../../allure-report
           # The link to the report will be available in the "pages build and deployment" workflow
