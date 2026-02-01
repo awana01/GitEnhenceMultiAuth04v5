@@ -44,3 +44,9 @@
 [2026-02-01 19:17:20 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
 [2026-02-01 19:17:26 INF] [qa] Storage state valid. Continuing.
 [2026-02-01 19:17:31 INF] [qa] === Test Run Finished ===
+[2026-02-01 23:11:57 INF] [qa] === Test Run Started | ENV=qa ===
+[2026-02-01 23:11:58 INF] [qa] Using existing auth storage: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 23:12:06 WRN] [qa] Detected login page. Storage state invalid.
+[2026-02-01 23:12:06 INF] [qa] Performing fresh login for Site=SiteA, Role=admin
+[2026-02-01 23:12:23 INF] [qa] New auth storage created: E:\DotNetWorks\GitHUB\GitEnhenceMultiAuth04v5\/auth\qa\SiteA_admin.json
+[2026-02-01 23:12:33 INF] [qa] === Test Run Finished ===
