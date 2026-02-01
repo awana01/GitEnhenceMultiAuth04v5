@@ -23,7 +23,9 @@ jobs:
         run: dotnet restore
 
       - name: Install Playwright browsers
-        run: pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+        shell: pwsh
+        run: |
+          pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
 
       - name: Run SpecFlow NUnit Playwright tests
         run: dotnet test 
@@ -48,14 +50,3 @@ jobs:
         with:
           name: allure-report
           path: allure-report
-          
-          # ===============================
-          # Deploy to GitHub Pages
-         # ===============================
-      - name: Deploy Allure Report to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-report

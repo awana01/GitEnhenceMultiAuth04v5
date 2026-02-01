@@ -1,133 +1,133 @@
-﻿name: Playwright NUnit Tests & Allure Report
+﻿#~ name: Playwright NUnit Tests & Allure Report
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+#~ on:
+  #~ push:
+    #~ branches: [ main ]
+  #~ pull_request:
+    #~ branches: [ main ]
     
-permissions:
-   contents: write
-   pages: write
-   id-token: write
+#~ permissions:
+   #~ contents: write
+   #~ pages: write
+   #~ id-token: write
 
-env:
-  DOTNET_VERSION: 9.0.x
-  ENVIRONMENT: qa
-  AUTH_MODE: storage
+#~ env:
+  #~ DOTNET_VERSION: 9.0.x
+  #~ ENVIRONMENT: qa
+  #~ AUTH_MODE: storage
 
-jobs:
-  build:
-    runs-on: windows-latest
+#~ jobs:
+  #~ build:
+    #~ runs-on: windows-latest
     
-    steps:
-      #~ - name: Run Playwright Tests (Windows)
-        #~ runs-on: windows-latest
-        #~ timeout-minutes: 90
+    #~ steps:
+      - name: Run Playwright Tests (Windows)
+        runs-on: windows-latest
+        timeout-minutes: 90
         
-      - name: Checkout code
-        uses: actions/checkout@v4
+      #~ - name: Checkout code
+        #~ uses: actions/checkout@v4
 
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 9.0.x
-          #${{ env.DOTNET_VERSION }}
+      #~ - name: Setup .NET SDK
+        #~ uses: actions/setup-dotnet@v4
+        #~ with:
+          #~ dotnet-version: 9.0.x
+          #~ #${{ env.DOTNET_VERSION }}
 
-      - name: Verify .NET version
-        run: |
-          dotnet --version
-          dotnet --list-sdks
-          dotnet --list-runtimes
+      #~ - name: Verify .NET version
+        #~ run: |
+          #~ dotnet --version
+          #~ dotnet --list-sdks
+          #~ dotnet --list-runtimes
 
-      # ===============================
-      # CACHE: NuGet packages
-      # ===============================
-      - name: Cache NuGet packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~\.nuget\packages
-          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/nuget.config') }}
-          restore-keys: |
-            nuget-${{ runner.os }}-
+      #~ # ===============================
+      #~ # CACHE: NuGet packages
+      #~ # ===============================
+      #~ - name: Cache NuGet packages
+        #~ uses: actions/cache@v4
+        #~ with:
+          #~ path: |
+            #~ ~\.nuget\packages
+          #~ key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/nuget.config') }}
+          #~ restore-keys: |
+            #~ nuget-${{ runner.os }}-
 
-      # ===============================
-      # CACHE: Playwright browsers
-      # ===============================
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~\AppData\Local\ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+      #~ # ===============================
+      #~ # CACHE: Playwright browsers
+      #~ # ===============================
+      #~ - name: Cache Playwright browsers
+        #~ uses: actions/cache@v4
+        #~ with:
+          #~ path: |
+            #~ ~\AppData\Local\ms-playwright
+          #~ key: playwright-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
 
-      - name: Restore dependencies
-        shell: pwsh
-        run: dotnet restore
+      #~ - name: Restore dependencies
+        #~ shell: pwsh
+        #~ run: dotnet restore
 
-      - name: Build project
-        shell: pwsh
-        run: dotnet build --no-restore
+      #~ - name: Build project
+        #~ shell: pwsh
+        #~ run: dotnet build --no-restore
 
-      - name: Install Playwright browsers
-        shell: pwsh
-        run: |
-          pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+      #~ - name: Install Playwright browsers
+        #~ shell: pwsh
+        #~ run: |
+          #~ pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
        
-      - name: Prepare Allure results directory
-        run: mkdir allure-results
+      #~ - name: Prepare Allure results directory
+        #~ run: mkdir allure-results
         
         
-      - name: Run tests
-        shell: pwsh
-        run: dotnet test --no-build --no-restore
-        continue-on-error: true
+      #~ - name: Run tests
+        #~ shell: pwsh
+        #~ run: dotnet test --no-build --no-restore
+        #~ continue-on-error: true
            
-        # ===============================
-      # Upload Allure raw results
-      # ===============================
-    - name: Upload Allure Results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results
-          if-no-files-found: warn
-          retention-days: 20
+        #~ # ===============================
+      #~ # Upload Allure raw results
+      #~ # ===============================
+    #~ - name: Upload Allure Results
+        #~ if: always()
+        #~ uses: actions/upload-artifact@v4
+        #~ with:
+          #~ name: allure-results
+          #~ path: allure-results
+          #~ if-no-files-found: warn
+          #~ retention-days: 20
        
-    - uses: actions/upload-artifact@master
-       with:
-         name: allure-results
-         path: allure-results
-         retention-days: 20
+    #~ - uses: actions/upload-artifact@master
+       #~ with:
+         #~ name: allure-results
+         #~ path: allure-results
+         #~ retention-days: 20
         
-    - name: Get Allure history
-      uses: actions/checkout@v2
-      if: always()
-      continue-on-error: true
-      with:
-        ref: gh-pages
-        path: gh-pages
+    #~ - name: Get Allure history
+      #~ uses: actions/checkout@v2
+      #~ if: always()
+      #~ continue-on-error: true
+      #~ with:
+        #~ ref: gh-pages
+        #~ path: gh-pages
     
-    - name: Test marketplace action
-      uses: simple-elf/allure-report-action@master
-      if: always()
-      id: allure-report
-      with:
-        allure_results: allure-results
-        gh_pages: gh-pages
-        allure_report: allure-report
-        allure_history: allure-history
-        keep_reports: 20
+    #~ - name: Test marketplace action
+      #~ uses: simple-elf/allure-report-action@master
+      #~ if: always()
+      #~ id: allure-report
+      #~ with:
+        #~ allure_results: allure-results
+        #~ gh_pages: gh-pages
+        #~ allure_report: allure-report
+        #~ allure_history: allure-history
+        #~ keep_reports: 20
 
-    - name: Deploy report to Github Pages
-      if: always()
-      uses: peaceiris/actions-gh-pages@v2
-      env:
-        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: allure-history
+    #~ - name: Deploy report to Github Pages
+      #~ if: always()
+      #~ uses: peaceiris/actions-gh-pages@v2
+      #~ env:
+        #~ PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #~ PUBLISH_BRANCH: gh-pages
+        #~ PUBLISH_DIR: allure-history
 
 
   #~ report:
