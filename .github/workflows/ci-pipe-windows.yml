@@ -26,6 +26,12 @@ jobs:
 
       - name: Build
         run: dotnet build
+        
+        
+      - name: Install Playwright Deps
+        shell: pwsh
+        run: |
+            pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
 
       - name: Run tests
         run: dotnet test
