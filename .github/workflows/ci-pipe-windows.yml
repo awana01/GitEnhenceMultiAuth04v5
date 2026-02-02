@@ -25,12 +25,13 @@ jobs:
           key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
                nuget-${{ runner.os }}-
-
-
-
-      - name: Restore dependencies
-        run: dotnet restore
-
+       
+      - name: Install Playwright Browsers
+        shell: pwsh
+        run: |
+             pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+       
+       
       - name: Cache Playwright
         uses: actions/cache@v4
         with:
@@ -39,10 +40,7 @@ jobs:
           restore-keys: |
             playwright-${{ runner.os }}-
 
-      #~ - name: Install Playwright Browsers
-        #~ shell: pwsh
-        #~ run: |
-             #~ pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+     
        
       - name: Make Results Directory
         run: |
@@ -57,6 +55,12 @@ jobs:
         run: |
             echo "GITHUB_WORKSPACE variable:"
             echo $GITHUB_WORKSPACE # This variable holds the path to the default workspace
+            
+      - name: Restore dependencies
+        run: dotnet restore
+       
+      - name: Build Project
+        run: dotnet build
        
       - name: Run Reqnroll Playwright Tests
         run: dotnet test --results-directory ./TestResults
