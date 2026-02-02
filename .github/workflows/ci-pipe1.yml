@@ -1,62 +1,62 @@
-name: Build, Test, and Publish Allure Report
+#~ name: Build, Test, and Publish Allure Report
 
-on:
-  push:
-    branches:
-      - main
-  # Optional: Allows you to run the workflow manually from the Actions tab
-  workflow_dispatch:
+#~ on:
+  #~ push:
+    #~ branches:
+      #~ - main
+  #~ # Optional: Allows you to run the workflow manually from the Actions tab
+  #~ workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+#~ jobs:
+  #~ build:
+    #~ runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    #~ steps:
+    #~ - name: Checkout repository
+      #~ uses: actions/checkout@v4
 
-    - name: Set up .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '9.0.x' # Or your specific .NET version
+    #~ - name: Set up .NET
+      #~ uses: actions/setup-dotnet@v4
+      #~ with:
+        #~ dotnet-version: '9.0.x' # Or your specific .NET version
 
-    - name: Restore dependencies
-      run: dotnet restore
+    #~ - name: Restore dependencies
+      #~ run: dotnet restore
         
-    - name: Install Playwright browsers
-      #~ shell: pwsh
-      run: |
-             pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps   
+    #~ - name: Install Playwright browsers
+      shell: pwsh
+      #~ run: |
+             #~ pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps   
       
-    - name: Build Project
-      run: dotnet build      
+    #~ - name: Build Project
+      #~ run: dotnet build      
       
-    - name: Run Tests and generate Allure results
-      run: dotnet test 
-      # The Allure.Reqnroll adapter automatically saves data into the configured results directory (default: allure-results)
+    #~ - name: Run Tests and generate Allure results
+      #~ run: dotnet test 
+      #~ # The Allure.Reqnroll adapter automatically saves data into the configured results directory (default: allure-results)
 
-    - name: Get Allure history
-      uses: actions/checkout@v4
-      if: always()
-      continue-on-error: true
-      with:
-        ref: gh-pages
-        path: gh-pages # This is where the history from the previous runs will be stored
+    #~ - name: Get Allure history
+      #~ uses: actions/checkout@v4
+      #~ if: always()
+      #~ continue-on-error: true
+      #~ with:
+        #~ ref: gh-pages
+        #~ path: gh-pages # This is where the history from the previous runs will be stored
 
-    - name: Build Allure Report
-      uses: simple-elf/allure-report-action@master # This action generates the HTML report
-      if: always()
-      id: allure-report
-      with:
-        allure_results: allure-results # Directory where test results were generated
-        gh_pages: gh-pages # Directory with history
-        allure_history: allure-history # Directory where the new report and history will be saved
-        keep_reports: 20 # Keep the last 20 reports
+    #~ - name: Build Allure Report
+      #~ uses: simple-elf/allure-report-action@master # This action generates the HTML report
+      #~ if: always()
+      #~ id: allure-report
+      #~ with:
+        #~ allure_results: allure-results # Directory where test results were generated
+        #~ gh_pages: gh-pages # Directory with history
+        #~ allure_history: allure-history # Directory where the new report and history will be saved
+        #~ keep_reports: 20 # Keep the last 20 reports
 
-    - name: Deploy report to GitHub Pages
-      if: always()
-      uses: peaceiris/actions-gh-pages@v4 # This action publishes the report to GitHub Pages
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages # The branch to publish to
-        publish_dir: allure-history # The directory to publish
+    #~ - name: Deploy report to GitHub Pages
+      #~ if: always()
+      #~ uses: peaceiris/actions-gh-pages@v4 # This action publishes the report to GitHub Pages
+      #~ with:
+        #~ github_token: ${{ secrets.GITHUB_TOKEN }}
+        #~ publish_branch: gh-pages # The branch to publish to
+        #~ publish_dir: allure-history # The directory to publish
