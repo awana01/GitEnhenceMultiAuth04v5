@@ -57,7 +57,7 @@ jobs:
             echo $GITHUB_WORKSPACE # This variable holds the path to the default workspace
        
       - name: Run Reqnroll Playwright Tests
-        run: dotnet test 
+        run: dotnet test --results-directory ./TestResults
 
       - name: Install Allure CLI
         run: |
@@ -66,7 +66,7 @@ jobs:
           echo "${{ github.workspace }}\allure-2.36.0\bin" >> $env:GITHUB_PATH
 
       - name: Generate Allure Results
-        run: allure generate ./allure-results -o ./allure-report --clean
+        run: allure generate ./TestResults/allure-results -o ./allure-report --clean
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
