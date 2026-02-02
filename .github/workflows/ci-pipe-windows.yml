@@ -10,17 +10,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      # 1. Checkout repo
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. Setup .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
 
-      # 3. Cache NuGet packages
       - name: Cache NuGet
         uses: actions/cache@v4
         with:
@@ -29,11 +26,9 @@ jobs:
           restore-keys: |
             nuget-${{ runner.os }}-
 
-      # 4. Restore dependencies
       - name: Restore dependencies
         run: dotnet restore
 
-      # 5. Cache Playwright browsers
       - name: Cache Playwright
         uses: actions/cache@v4
         with:
@@ -43,42 +38,132 @@ jobs:
             playwright-${{ runner.os }}-
 
       - name: Install Playwright Browsers
-        run: npx playwright install chromium --with-deps
+        run: npx playwright install --with-deps
 
-      # 6. Run tests with Allure output
       - name: Run Reqnroll Playwright Tests
-        run: dotnet test 
+        run: dotnet test --logger:"trx;LogFileName=test_results.trx" --results-directory ./TestResults
 
-      # 7. Generate Allure results
       - name: Generate Allure Results
         run: |
-      # dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
-          allure generate ./allure-results -o ./allure-report --clean
+          dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+          allure generate ./TestResults -o ./allure-report --clean
 
-      # 8. Upload Allure report as artifact
       - name: Upload Allure Report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: ./allure-report
-          
- deploy:
+
+  deploy:
     runs-on: windows-latest
     needs: test
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Download report artifact from previous job
       - name: Download Allure Report
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v4
         with:
           name: allure-report
           path: ./allure-report
 
-      # Deploy to GitHub Pages
       - name: Deploy Allure Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
+
+
+
+
+
+
+
+
+
+
+#~ name: Playwright Reqnroll Tests with Allure (Windows)
+
+#~ on:
+  #~ push:
+    #~ branches: [ main ]
+  #~ pull_request:
+
+#~ jobs:
+  #~ test:
+    #~ runs-on: windows-latest
+
+    #~ steps:
+      #~ # 1. Checkout repo
+      #~ - name: Checkout
+        #~ uses: actions/checkout@v4
+
+      #~ # 2. Setup .NET
+      #~ - name: Setup .NET
+        #~ uses: actions/setup-dotnet@v4
+        #~ with:
+          #~ dotnet-version: '9.0.x'
+
+      #~ # 3. Cache NuGet packages
+      #~ - name: Cache NuGet
+        #~ uses: actions/cache@v4
+        #~ with:
+          #~ path: ~\AppData\Local\NuGet\Cache
+          #~ key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          #~ restore-keys: |
+            #~ nuget-${{ runner.os }}-
+
+      #~ # 4. Restore dependencies
+      #~ - name: Restore dependencies
+        #~ run: dotnet restore
+
+      #~ # 5. Cache Playwright browsers
+      #~ - name: Cache Playwright
+        #~ uses: actions/cache@v4
+        #~ with:
+          #~ path: ~\AppData\Local\ms-playwright
+          #~ key: playwright-${{ runner.os }}-${{ hashFiles('**/playwright.config.*') }}
+          #~ restore-keys: |
+            #~ playwright-${{ runner.os }}-
+
+      #~ - name: Install Playwright Browsers
+        #~ run: npx playwright install chromium --with-deps
+
+      #~ # 6. Run tests with Allure output
+      #~ - name: Run Reqnroll Playwright Tests
+        #~ run: dotnet test 
+
+      #~ # 7. Generate Allure results
+      #~ - name: Generate Allure Results
+        #~ run: |
+      #~ # dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+          #~ allure generate ./allure-results -o ./allure-report --clean
+
+      #~ # 8. Upload Allure report as artifact
+      #~ - name: Upload Allure Report
+        #~ uses: actions/upload-artifact@v5
+        #~ with:
+          #~ name: allure-report
+          #~ path: ./allure-report
+          
+ #~ deploy:
+    #~ runs-on: windows-latest
+    #~ needs: test
+    #~ steps:
+      #~ - name: Checkout
+        #~ uses: actions/checkout@v4
+
+      #~ # Download report artifact from previous job
+      #~ - name: Download Allure Report
+        #~ uses: actions/download-artifact@v5
+        #~ with:
+          #~ name: allure-report
+          #~ path: ./allure-report
+
+      #~ # Deploy to GitHub Pages
+      #~ - name: Deploy Allure Report to GitHub Pages
+        #~ uses: peaceiris/actions-gh-pages@v4
+        #~ with:
+          #~ github_token: ${{ secrets.GITHUB_TOKEN }}
+          #~ publish_dir: ./allure-report
