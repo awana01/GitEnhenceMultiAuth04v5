@@ -46,7 +46,7 @@ jobs:
          run: |
              mkdir allure-results
              echo 
-       - name: Print current working directory using pwd
+      - name: Print current working directory using pwd
          run: |
              echo "Current directory (pwd):"
              pwd # 'pwd' command is used in Unix-like systems
