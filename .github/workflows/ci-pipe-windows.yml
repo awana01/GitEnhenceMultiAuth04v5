@@ -62,7 +62,7 @@ jobs:
           name: allure-report
           path: ./allure-report
           
-   deploy:
+ deploy:
     runs-on: windows-latest
     needs: test
     steps:
