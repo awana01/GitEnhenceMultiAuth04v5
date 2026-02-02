@@ -43,11 +43,11 @@ jobs:
              #~ pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
        
       - name: Make Results Directory
-         run: |
+        run: |
              mkdir allure-results
              echo dir
       - name: Print current working directory using pwd
-         run: |
+        run: |
              echo "Current directory (pwd):"
              pwd # 'pwd' command is used in Unix-like systems
 
