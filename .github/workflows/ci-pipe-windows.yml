@@ -65,10 +65,26 @@ jobs:
       - name: Debug Allure results
         shell: pwsh
         run: |
-            Get-ChildItem allure-results -Recurse
+           Get-ChildItem bin/Debug/net9.0/allure-results -Recurse
 
-      - name: Generate Allure report
-        run: allure generate allure-results -o allure-report --clean
+      - name: Install Allure CLI
+        shell: pwsh
+        run: |
+             curl -L https://github.com/allure-framework/allure2/releases/download/2.36.0/allure-2.36.0.zip -o allure.zip
+             tar -xf allure.zip
+             "$PWD\allure-2.36.0\bin" | Out-File -Append -FilePath $env:GITHUB_PATH
+
+      - name: Generate Allure Report
+        run: allure generate bin/Debug/net9.0/allure-results -o allure-report --clean
+
+
+      #~ - name: Debug Allure results
+        #~ shell: pwsh
+        #~ run: |
+            #~ Get-ChildItem allure-results -Recurse
+
+      #~ - name: Generate Allure report
+        #~ run: allure generate allure-results -o allure-report --clean
         
       - name: Locate Allure results anywhere
         shell: pwsh
