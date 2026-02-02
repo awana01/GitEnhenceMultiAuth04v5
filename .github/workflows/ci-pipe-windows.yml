@@ -21,10 +21,10 @@ jobs:
       - name: Cache NuGet
         uses: actions/cache@v4
         with:
-        path: ~/.nuget/packages
-        key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
-        restore-keys: |
-          nuget-${{ runner.os }}-
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+               nuget-${{ runner.os }}-
 
 
 
