@@ -45,7 +45,7 @@ jobs:
       - name: Make Results Directory
          run: |
              mkdir allure-results
-             echo 
+             echo dir
       - name: Print current working directory using pwd
          run: |
              echo "Current directory (pwd):"
