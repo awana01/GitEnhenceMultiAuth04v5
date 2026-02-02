@@ -47,9 +47,9 @@ jobs:
 
       - name: Install Allure CLI
         run: |
-          curl -L https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.zip -o allure.zip
+          curl -L https://github.com/allure-framework/allure2/releases/download/2.36.0/allure-2.36.0.zip -o allure.zip
           tar -xf allure.zip
-          echo "${{ github.workspace }}\allure-2.29.0\bin" >> $env:GITHUB_PATH
+          echo "${{ github.workspace }}\allure-2.36.0\bin" >> $env:GITHUB_PATH
 
       - name: Generate Allure Results
         run: allure generate ./TestResults -o ./allure-report --clean
