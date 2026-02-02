@@ -37,10 +37,10 @@ jobs:
           restore-keys: |
             playwright-${{ runner.os }}-
 
-      - name: Install Playwright Browsers
-        shell: pwsh
-        run: |
-             pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+      #~ - name: Install Playwright Browsers
+        #~ shell: pwsh
+        #~ run: |
+             #~ pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
 
       - name: Run Reqnroll Playwright Tests
         run: dotnet test --logger:"trx;LogFileName=test_results.trx" --results-directory ./TestResults
