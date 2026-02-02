@@ -25,7 +25,12 @@ jobs:
         
     - name: Build Project
       run: dotnet build    
-        
+      
+    - name: Install Playwright browsers
+      shell: pwsh
+      run: |
+             pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps   
+      
     - name: Run Tests and generate Allure results
       run: dotnet test 
       # The Allure.Reqnroll adapter automatically saves data into the configured results directory (default: allure-results)

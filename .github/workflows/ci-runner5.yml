@@ -58,10 +58,10 @@
       #~ - name: Build project
         #~ run: dotnet build --no-restore
         
-      - name: Install Playwright browsers
-        shell: pwsh
-        run: |
-             pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+      #~ - name: Install Playwright browsers
+        #~ shell: pwsh
+        #~ run: |
+             #~ pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
        
 
       #~ - name: Prepare Allure results directory
