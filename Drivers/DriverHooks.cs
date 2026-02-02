@@ -1,6 +1,8 @@
-﻿using EnhenceMultiAuth04v4.Core;
+﻿using Allure.Net.Commons;
+using EnhenceMultiAuth04v4.Core;
 using EnhenceMultiAuth04V4.AuthConfig;
 using Microsoft.Playwright;
+using NUnit.Framework;
 using Reqnroll;
 using Serilog;
 using System;
@@ -17,6 +19,14 @@ namespace EnhenceMultiAuth04v4.Drivers
         private readonly ScenarioContext _ctx;
 
         public DriverHooks(ScenarioContext ctx) => _ctx = ctx;
+
+        [OneTimeSetUp]
+        public static void oneSetUp()
+        {
+            AllureLifecycle.Instance.CleanupResultDirectory();
+        }
+
+
 
         [BeforeScenario]
         public async Task Setup()
