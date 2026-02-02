@@ -65,7 +65,30 @@ namespace EnhenceMultiAuth04v4.Steps
             await _page.WaitForSelectorAsync("span.oxd-userdropdown-tab", new PageWaitForSelectorOptions { Timeout = 30_000 });
 
             await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded, new PageWaitForLoadStateOptions { Timeout = 25_000 });
-            AllureApi.AddAttachment("Screenshot2", "image/png", await ProjUtil.CaptureScreenshotBytes(_page, "admin.png"));
+            //AllureApi.AddAttachment("Screenshot2", "image/png", await ProjUtil.CaptureScreenshotBytes(_page, "admin.png"));
+
+            //var screenshotBytes = await ProjUtil.CaptureScreenshotBytes(_page, "admin.png");
+            //using var ms = new MemoryStream(screenshotBytes);
+            //AllureApi.AddAttachment("Screenshot2", "image/png", ms);
+
+            var screenshotBytes = await ProjUtil.CaptureScreenshotBytes(_page, "admin.png");
+
+            //// Ensure allure-results exists
+            //var allureResultsDir = Path.Combine(Directory.GetCurrentDirectory(), "allure-results");
+            //Directory.CreateDirectory(allureResultsDir);
+            //// Write screenshot to file
+            //var screenshotPath = Path.Combine(allureResultsDir, "admin.png");
+            var screenshotPath = Path.Combine("allure-results", "admin.png");
+            await File.WriteAllBytesAsync(screenshotPath, screenshotBytes);
+            // Attach to Allure
+            AllureApi.AddAttachment("Screenshot2", "image/png", screenshotPath);
+
+
+
+
+
+
+
 
         }
 
