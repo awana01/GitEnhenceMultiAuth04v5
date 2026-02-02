@@ -22,9 +22,12 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore
-
+        
+    - name: Build Project
+      run: dotnet build    
+        
     - name: Run Tests and generate Allure results
-      run: dotnet test --logger "console;Allure"
+      run: dotnet test 
       # The Allure.Reqnroll adapter automatically saves data into the configured results directory (default: allure-results)
 
     - name: Get Allure history
