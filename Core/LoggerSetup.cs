@@ -12,41 +12,30 @@ namespace EnhenceMultiAuth04v4.Core
     //    {
     //        Log.Logger = new LoggerConfiguration()
     //            .WriteTo.Console()
-    //            .WriteTo.File("logs/testlog-.txt", rollingInterval: RollingInterval.Day)
+    //            .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
     //            .CreateLogger();
     //    }
     //}
 
-    public static class LoggerSetup
-    {
-        public static void Init()
-        {
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
-                .CreateLogger();
-        }
-    }
+    //public static class LoggerBootstrap
+    //{
+    //    public static void Initialize(string environment)
+    //    {
+    //        var configuration = new ConfigurationBuilder()
+    //            .AddJsonFile("Config/appsettings.json")
+    //            .AddJsonFile($"Config/appsettings.{environment}.json", optional: true)
+    //            .Build();
 
-    public static class LoggerBootstrap
-    {
-        public static void Initialize(string environment)
-        {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("Config/appsettings.json")
-                .AddJsonFile($"Config/appsettings.{environment}.json", optional: true)
-                .Build();
+    //        Log.Logger = new LoggerConfiguration()
+    //            .ReadFrom.Configuration(configuration)
+    //            .Enrich.WithProperty("EnvironmentName", environment)
+    //            .CreateLogger();
+    //    }
 
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
-                .Enrich.WithProperty("EnvironmentName", environment)
-                .CreateLogger();
-        }
-
-        public static void Shutdown()
-        {
-            Log.CloseAndFlush();
-        }
-    }
+    //    public static void Shutdown()
+    //    {
+    //        Log.CloseAndFlush();
+    //    }
+//    }
 
 }

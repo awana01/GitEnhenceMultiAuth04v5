@@ -27,7 +27,7 @@ namespace EnhenceMultiAuth04v4.Drivers
 
             Environment.SetEnvironmentVariable("ENVIRONMENT", env);
 
-            LoggerBootstrap.Initialize(env);
+            //LoggerBootstrap.Initialize(env);
             Log.Information("=== Test Run Started | ENV={Env} ===", env);
 
             var authMode = AuthModeResolver.Resolve(_ctx);
@@ -54,8 +54,8 @@ namespace EnhenceMultiAuth04v4.Drivers
                 await _browser.CloseAsync();
 
             _pw?.Dispose();
-            Log.Information("=== Test Run Finished ===");
-            LoggerBootstrap.Shutdown();
+            //Log.Information("=== Test Run Finished ===");
+            //LoggerBootstrap.Shutdown();
 
         }
     }
