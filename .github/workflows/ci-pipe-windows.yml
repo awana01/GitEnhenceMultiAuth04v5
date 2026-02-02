@@ -8,6 +8,7 @@ on:
 permissions:
   contents: write
 
+
 jobs:
   test-and-publish:
     runs-on: windows-latest
@@ -36,17 +37,6 @@ jobs:
       - name: Run tests
         run: dotnet test
 
-      #~ # ?? Sanity check (keep this)
-      #~ - name: Debug Allure results
-        #~ shell: pwsh
-        #~ run: |
-          #~ if (Test-Path allure-results) {
-            #~ Get-ChildItem allure-results -Recurse
-          #~ } else {
-            #~ Write-Host "? No allure-results directory"
-            #~ exit 1
-          #~ }
-       
       - name: Install Allure CLI
         shell: pwsh
         run: |

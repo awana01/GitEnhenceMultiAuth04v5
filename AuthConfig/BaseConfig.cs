@@ -15,7 +15,7 @@ namespace EnhenceMultiAuth04V4.AuthConfig
         public static EnvironmentConfig Load()
         {
             var env = Environment.GetEnvironmentVariable("ENVIRONMENT") ?? "qa";
-
+            
             var config = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile("Config/appsettings.json", false)
@@ -65,10 +65,10 @@ namespace EnhenceMultiAuth04V4.AuthConfig
             var context = await _browser.NewContextAsync();
             var page = await context.NewPageAsync();
 
-            var siteCfg = _config.Sites[site];
-            await page.GotoAsync(siteCfg.BaseUrl + siteCfg.LoginUrl);
+            var siteCfg = _config?.Sites?[site];
+            await page.GotoAsync(siteCfg?.BaseUrl + siteCfg?.LoginUrl);
 
-            await SiteLoginRegistry.LoginAsync(site, page, siteCfg.Users[role]);
+            await SiteLoginRegistry.LoginAsync(site, page, siteCfg!.Users![role]);
 
             // ✅ SAME PAGE USED FOR TEST
             return new AuthSession(context, page);
