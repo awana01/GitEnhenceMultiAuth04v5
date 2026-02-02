@@ -46,15 +46,17 @@ jobs:
      
        
       - name: Make Results Directory
+        shell: pwsh
         run: |
-             mkdir ./allure-results
              echo dir
+             
       - name: Print current working directory using pwd
         run: |
              echo "Current directory (pwd):"
              pwd # 'pwd' command is used in Unix-like systems
 
       - name: Print the GITHUB_WORKSPACE environment variable
+        shell: pwsh
         run: |
             echo "GITHUB_WORKSPACE variable:"
             echo $GITHUB_WORKSPACE # This variable holds the path to the default workspace
@@ -86,10 +88,12 @@ jobs:
         run: allure generate ./allure-results -o ./allure-report --clean
        
       - name: Debug Allure files
+        shell: pwsh
         run: |
            Get-ChildItem -Recurse allure-results
        
       - name: Verify Allure results
+        shell: pwsh
         run: |
            dir allure-results
        
