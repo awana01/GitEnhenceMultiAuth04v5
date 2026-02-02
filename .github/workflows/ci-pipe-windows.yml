@@ -38,14 +38,16 @@ jobs:
             playwright-${{ runner.os }}-
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        shell: pwsh
+        run: |
+             pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
 
       - name: Run Reqnroll Playwright Tests
         run: dotnet test --logger:"trx;LogFileName=test_results.trx" --results-directory ./TestResults
 
       - name: Generate Allure Results
         run: |
-          dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+       #~ dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
           allure generate ./TestResults -o ./allure-report --clean
 
       - name: Upload Allure Report
