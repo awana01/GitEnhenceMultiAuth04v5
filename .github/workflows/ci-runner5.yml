@@ -71,12 +71,12 @@
         #~ run: dotnet test -s allure.runsettings --no-build --no-restore
         #~ continue-on-error: true
 
-      - name: Ensure Allure artifact is not empty
-        if: always()
-        run: |
-          if (!(Get-ChildItem allure-results -Recurse -ErrorAction SilentlyContinue)) {
-            "No Allure results generated" | Out-File allure-results\EMPTY_RUN.txt
-          }
+      #~ - name: Ensure Allure artifact is not empty
+        #~ if: always()
+        #~ run: |
+          #~ if (!(Get-ChildItem allure-results -Recurse -ErrorAction SilentlyContinue)) {
+            #~ "No Allure results generated" | Out-File allure-results\EMPTY_RUN.txt
+          #~ }
 
       #~ - name: Upload Allure Results
         #~ if: always()
