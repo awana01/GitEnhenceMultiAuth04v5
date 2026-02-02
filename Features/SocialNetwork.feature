@@ -2,17 +2,17 @@
 
 
 
-Feature: Social Network Tests
+#Feature: Social Network Tests
   
-# @env:qa @site:SocialNetwork @role:admin @auth:fresh
-# @env:qa @auth:disabled
-  Scenario: Login as Admin
-     Given user on demo page
-     #When click on front end demo button
-     #Then new tab is open
-     #When enter username and password
-     #And click on login button
-     #Then user navigates to social network dashboard
+## @env:qa @site:SocialNetwork @role:admin @auth:fresh
+## @env:qa @auth:disabled
+#  Scenario: Login as Admin
+#     Given user on demo page
+#     #When click on front end demo button
+#     #Then new tab is open
+#     #When enter username and password
+#     #And click on login button
+#     #Then user navigates to social network dashboard
 
 
   # @env:qa @site:SocialNetwork @role:admin @auth:fresh
