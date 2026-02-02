@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","2626","Admin accesses","","2026-02-02","passed","2026-02-02","","","",""
+"","2597","Admin accesses PIM","","2026-02-02","passed","2026-02-02","","","",""
+"","5029","Login as Admin","","2026-02-02","passed","2026-02-02","","","",""
