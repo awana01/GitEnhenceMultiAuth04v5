@@ -24,7 +24,7 @@ jobs:
       run: dotnet restore
         
     - name: Install Playwright browsers
-      shell: pwsh
+      #~ shell: pwsh
       run: |
              pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps   
       
@@ -43,12 +43,6 @@ jobs:
         ref: gh-pages
         path: gh-pages # This is where the history from the previous runs will be stored
 
-    - name: Download Allure Results
-      uses: actions/download-artifact@v5
-      with:
-         name: allure-results
-         path: allure-results
-    
     - name: Build Allure Report
       uses: simple-elf/allure-report-action@master # This action generates the HTML report
       if: always()
