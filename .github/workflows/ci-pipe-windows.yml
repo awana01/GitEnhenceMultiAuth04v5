@@ -24,7 +24,7 @@ jobs:
           path: ~\AppData\Local\NuGet\Cache
           key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
           restore-keys: |
-            nuget-${{ runner.os }}-
+               nuget-${{ runner.os }}-
 
       - name: Restore dependencies
         run: dotnet restore
@@ -47,8 +47,7 @@ jobs:
 
       - name: Generate Allure Results
         run: |
-       #~ dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
-          allure generate ./TestResults -o ./allure-report --clean
+            allure generate ./TestResults -o ./allure-report --clean
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
