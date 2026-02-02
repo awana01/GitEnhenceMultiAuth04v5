@@ -36,27 +36,45 @@ jobs:
       - name: Run tests
         run: dotnet test
 
-      # ?? Sanity check (keep this)
-      - name: Debug Allure results
-        shell: pwsh
-        run: |
-          if (Test-Path allure-results) {
-            Get-ChildItem allure-results -Recurse
-          } else {
-            Write-Host "? No allure-results directory"
-            exit 1
-          }
-
+      #~ # ?? Sanity check (keep this)
+      #~ - name: Debug Allure results
+        #~ shell: pwsh
+        #~ run: |
+          #~ if (Test-Path allure-results) {
+            #~ Get-ChildItem allure-results -Recurse
+          #~ } else {
+            #~ Write-Host "? No allure-results directory"
+            #~ exit 1
+          #~ }
+       
       - name: Install Allure CLI
         shell: pwsh
         run: |
           curl -L https://github.com/allure-framework/allure2/releases/download/2.36.0/allure-2.36.0.zip -o allure.zip
           tar -xf allure.zip
           "$PWD\allure-2.36.0\bin" | Out-File -Append -FilePath $env:GITHUB_PATH
+          
+      - name: Set Allure results directory
+        shell: pwsh
+        run: |
+            echo "ALLURE_RESULTS_DIRECTORY=$env:GITHUB_WORKSPACE\allure-results" >> $env:GITHUB_ENV
+
+      - name: Run tests
+        run: dotnet test
+
+      - name: Debug Allure results
+        shell: pwsh
+        run: |
+            Get-ChildItem allure-results -Recurse
 
       - name: Generate Allure report
         run: allure generate allure-results -o allure-report --clean
-
+        
+      - name: Locate Allure results anywhere
+        shell: pwsh
+        run: |
+            Get-ChildItem . -Recurse -Directory -Filter allure-results
+   
       - name: Publish Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
