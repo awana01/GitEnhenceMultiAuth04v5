@@ -41,7 +41,21 @@ jobs:
         #~ shell: pwsh
         #~ run: |
              #~ pwsh ./bin/Debug/net9.0/playwright.ps1 install chromium --with-deps
+       
+      - name: Make Results Directory
+         run: |
+             mkdir allure-results
+             echo 
+       - name: Print current working directory using pwd
+         run: |
+             echo "Current directory (pwd):"
+             pwd # 'pwd' command is used in Unix-like systems
 
+      - name: Print the GITHUB_WORKSPACE environment variable
+        run: |
+            echo "GITHUB_WORKSPACE variable:"
+            echo $GITHUB_WORKSPACE # This variable holds the path to the default workspace
+       
       - name: Run Reqnroll Playwright Tests
         run: dotnet test 
 
