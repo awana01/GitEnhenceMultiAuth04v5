@@ -73,8 +73,17 @@ jobs:
           tar -xf allure.zip
           echo "${{ github.workspace }}\allure-2.36.0\bin" >> $env:GITHUB_PATH
 
-      - name: Generate Allure Results
-        run: allure generate ./TestResults/allure-results -o ./allure-report --clean
+      - name: Clean old Allure results
+        run: |
+             if (Test-Path allure-results) { Remove-Item allure-results -Recurse -Force }
+             mkdir allure-results
+
+      - name: Generate Allure Report
+        run: allure generate ./allure-results -o ./allure-report --clean
+
+
+      #~ - name: Generate Allure Results
+        #~ run: allure generate ./TestResults/allure-results -o ./allure-report --clean
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
