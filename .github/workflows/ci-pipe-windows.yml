@@ -48,6 +48,7 @@ jobs:
       - name: Make Results Directory
         shell: pwsh
         run: |
+             mkdir ./allure-results
              echo dir
              
       - name: Print current working directory using pwd
