@@ -13,8 +13,8 @@ Scenario: Admin accesses PIM
   When clik on PIM link
   Then user navigates to PIM page
 
-#@env:qa @site:SiteA @role:admin
-#Scenario: Admin accesses 
-#  Given I open dashboard
-#  When click on "Admin" menu on dashboard
-#  Then Verify success full navigation to admin page
+@env:qa @site:SiteA @role:admin
+Scenario: Admin accesses 
+  Given I open dashboard
+  When click on "Admin" menu on dashboard
+  Then Verify success full navigation to admin page
