@@ -1,5 +1,6 @@
 ﻿using EnhenceMultiAuth04v4.Configurations;
 using EnhenceMultiAuth04v4.Pages;
+using GitEnhenceMultiAuth04V5.AuthWorkers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Playwright;
 using System;

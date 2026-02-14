@@ -1,6 +1,7 @@
 ﻿using Allure.Net.Commons;
-using Microsoft.Playwright;
 using EnhenceMultiAuth04v4.Utils;
+using GitEnhenceMultiAuth04V5.Utils;
+using Microsoft.Playwright;
 using Reqnroll;
 
 
@@ -16,7 +17,7 @@ namespace EnhenceMultiAuth04v4.Steps
         [Given(@"I open dashboard")]
         public async Task OpenDashboard()
         {
-            await _page.GotoAsync("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",new PageGotoOptions() {Timeout=20_000 });
+            //await _page.GotoAsync("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",new PageGotoOptions() {Timeout=20_000 });
         }
 
         [Then(@"I should see admin widgets")]
@@ -114,6 +115,25 @@ namespace EnhenceMultiAuth04v4.Steps
 
 
         }
+
+
+        [When(@"User get the username from table")]
+        public async Task f3()
+        {
+            Thread.Sleep(5000);
+            HRMGenericTable tableData = new HRMGenericTable(_page);
+
+            ILocator cellText = await tableData.GetCellAsync(4, "Username");
+            Console.WriteLine(await cellText.TextContentAsync());
+
+
+
+        }
+
+
+
+
+
 
 
 

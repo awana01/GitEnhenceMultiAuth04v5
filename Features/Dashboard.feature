@@ -18,3 +18,12 @@ Scenario: Admin accesses
   Given I open dashboard
   When click on "Admin" menu on dashboard
   Then Verify success full navigation to admin page
+
+
+
+@env:qa @site:SiteA @role:admin
+Scenario: Admin Access User Table
+  Given I open dashboard
+  When click on "Admin" menu on dashboard
+  Then Verify success full navigation to admin page
+  When User get the username from table  

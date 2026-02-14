@@ -105,7 +105,7 @@ namespace GitEnhenceMultiAuth04V5.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/Dashboard.feature.ndjson", 4);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/Dashboard.feature.ndjson", 5);
         }
         
         [global::NUnit.Framework.TestAttribute()]
@@ -181,6 +181,48 @@ this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
 #line 20
   await testRunner.ThenAsync("Verify success full navigation to admin page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::NUnit.Framework.TestAttribute()]
+        [global::NUnit.Framework.DescriptionAttribute("Admin Access User Table")]
+        [global::NUnit.Framework.CategoryAttribute("env:qa")]
+        [global::NUnit.Framework.CategoryAttribute("site:SiteA")]
+        [global::NUnit.Framework.CategoryAttribute("role:admin")]
+        public async global::System.Threading.Tasks.Task AdminAccessUserTable()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "env:qa",
+                    "site:SiteA",
+                    "role:admin"};
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "2";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Admin Access User Table", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 25
+this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 26
+  await testRunner.GivenAsync("I open dashboard", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 27
+  await testRunner.WhenAsync("click on \"Admin\" menu on dashboard", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 28
+  await testRunner.ThenAsync("Verify success full navigation to admin page", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 29
+  await testRunner.WhenAsync("User get the username from table", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
